@@ -50,10 +50,9 @@ const Header = ({ typeHeader }) => {
         <Box
           sx={{ display: "flex", justifyContent: "space-between", gap: "20px" }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <FilterListIcon color="primary" />
-            <FilterAltOutlinedIcon color="primary" />
-          </Box>
+          <Box
+            sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+          ></Box>
           <TextField
             id="search"
             placeholder="Search"

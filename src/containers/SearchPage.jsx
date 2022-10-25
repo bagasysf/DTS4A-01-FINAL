@@ -39,68 +39,70 @@ const HomePage = () => {
   }, [pageApi, params]);
   return (
     <>
-      <Box>
-        <Header typeHeader="search" />
-        <Container
-          maxWidth="xl"
-          sx={{
-            minHeight: "100vh",
-          }}
-        >
-          <h2>Result</h2>
-          {isLoadingSearchNews ? (
-            <Loading />
-          ) : searchNews.results.length > 0 &&
-            Object.values(params)[0] !== "" ? (
-            <ListNews news={searchNews.results} />
-          ) : (
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={{
-                mb: "10px",
-                mt: "10px",
-                flexGrow: "1",
-                textAlign: "center",
-                fontFamily: "Playfair Display",
-              }}
-            >
-              Not Found
-            </Typography>
-          )}
+      <Container maxWidth="md" sx={{ overflow: "hidden" }}>
+        <Box sx={{ p: "20px" }}>
+          <Header typeHeader="search" />
+          <Container
+            maxWidth="xl"
+            sx={{
+              minHeight: "100vh",
+            }}
+          >
+            <h2>Result</h2>
+            {isLoadingSearchNews ? (
+              <Loading />
+            ) : searchNews.results.length > 0 &&
+              Object.values(params)[0] !== "" ? (
+              <ListNews news={searchNews.results} />
+            ) : (
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  mb: "10px",
+                  mt: "10px",
+                  flexGrow: "1",
+                  textAlign: "center",
+                  fontFamily: "Playfair Display",
+                }}
+              >
+                Not Found
+              </Typography>
+            )}
 
-          {/* error */}
-          {errorSearchNews != null ? (
-            <Dialog onClose={handleClose} open={openError}>
-              <DialogTitle>Error!</DialogTitle>
-              <DialogContent>
-                {errorSearchNews != null ? errorSearchNews.message : ""}
-              </DialogContent>
-            </Dialog>
+            {/* error */}
+            {errorSearchNews != null ? (
+              <Dialog onClose={handleClose} open={openError}>
+                <DialogTitle>Error!</DialogTitle>
+                <DialogContent>
+                  {errorSearchNews != null ? errorSearchNews.message : ""}
+                </DialogContent>
+              </Dialog>
+            ) : (
+              ""
+            )}
+          </Container>
+
+          {searchNews.results.length > 0 ? (
+            <Stack spacing={2} marginTop="50px">
+              <Pagination
+                count={searchNews.pages}
+                showFirstButton
+                showLastButton
+                variant="outlined"
+                shape="rounded"
+                sx={{ marginX: "auto" }}
+                onChange={(e, value) => setPageApi(value)}
+              />
+            </Stack>
           ) : (
             ""
           )}
-        </Container>
 
-        {searchNews.results.length > 0 ? (
-          <Stack spacing={2} marginTop="50px">
-            <Pagination
-              count={searchNews.pages}
-              showFirstButton
-              showLastButton
-              variant="outlined"
-              shape="rounded"
-              sx={{ marginX: "auto" }}
-              onChange={(e, value) => setPageApi(value)}
-            />
-          </Stack>
-        ) : (
-          ""
-        )}
-
-        <Footer />
-      </Box>
+          <Footer />
+        </Box>
+      </Container>
     </>
   );
 };

@@ -30,7 +30,12 @@ export default function LandingPage() {
                 gap: "20px",
               }}
             >
-              <Link to="/signin">
+              <Link
+                to="/signin"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -41,7 +46,12 @@ export default function LandingPage() {
                   </Typography>
                 </Button>
               </Link>
-              <Link to="/register">
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
                 <Button
                   variant="contained"
                   color="secondary"

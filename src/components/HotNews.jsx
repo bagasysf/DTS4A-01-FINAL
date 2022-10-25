@@ -102,13 +102,13 @@ const HotNews = ({ topNews }) => {
         gutterBottom
         component="div"
         sx={{
-          width: "400px",
+          width: "300px",
           mb: "10px",
           mt: "10px",
           display: { xs: "none", lg: "block" },
           paddingX: "20px",
           color: "black",
-          fontSize: "20px",
+          fontSize: "18px",
         }}
       >
         {String(topNews.fields.body)
