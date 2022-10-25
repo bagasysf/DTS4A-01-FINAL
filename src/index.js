@@ -12,7 +12,6 @@ import LogoutContainer from "./containers/Logout Container";
 import { ThemeProvider } from "@mui/material";
 import theme from "./themes/theme";
 import LandingContainer from "./containers/LandingContainer";
-
 import "@fontsource/poppins";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

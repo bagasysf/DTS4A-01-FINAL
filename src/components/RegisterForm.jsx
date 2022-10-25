@@ -1,31 +1,52 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { auth, registrationWithEmailAndPassword } from '../authentication/firebase'; 
+import {
+  auth,
+  registrationWithEmailAndPassword,
+} from "../authentication/firebase";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
+  const [user, isLoading, error] = useAuthState(auth);
+
   const [credential, setCredential] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    if (user) {
+      navigate("/home");
+    }
+    if (error) {
+      console.log(error.code);
+    }
+  });
 
   const textFieldEmailOnChangeHandler = (event) => {
     setCredential({
       ...credential,
-      email: event.target.value
-    })
-  }
+      email: event.target.value,
+    });
+  };
 
-  registerHandler = () => {
-    registrationWithEmailAndPassword(credential.email, credential.password)
-  }
-
+  const registerHandler = () => {
+    registrationWithEmailAndPassword(credential.email, credential.password);
+    navigate("/signin");
+  };
 
   const textFieldPasswordOnChangeHandler = (event) => {
     setCredential({
       ...credential,
-      password: event.target.value
-    })
-  }
+      password: event.target.value,
+    });
+  };
 
   return (
     <>
@@ -67,16 +88,6 @@ export default function RegisterForm() {
           >
             Password
           </TextField>
-          <TextField
-            required
-            id="confirmPassword"
-            label="Confirm Password"
-            type="password"
-            placeholder="Confirm Password"
-            color="secondary"
-          >
-            Confirm Password
-          </TextField>
           <Box sx={{ display: "inline-flex", justifyContent: "end" }}>
             <Button
               variant="contained"
@@ -85,9 +96,10 @@ export default function RegisterForm() {
                 display: "flex",
               }}
               color="secondary"
+              onClick={registerHandler}
             >
               <Typography fontWeight="700" color="white">
-                Sign In
+                Register
               </Typography>
             </Button>
           </Box>

@@ -1,8 +1,51 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
-import {auth, signInWithEmailAndPassword } from '../authentication/firebase';
+import { auth, logInWithEmailAndPassword } from "../authentication/firebase";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
 
 export default function SignInForm() {
+  const [credential, setCredential] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const [user, isLoading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    if (user) {
+      navigate("/home");
+    }
+    if (error) {
+      console.log(error.code);
+    }
+  }, [user, isLoading, navigate]);
+
+  const textFieldEmailOnChangeHandler = (event) => {
+    setCredential({
+      ...credential,
+      email: event.target.value,
+    });
+  };
+
+  const textFieldPasswordOnChangeHandler = (event) => {
+    setCredential({
+      ...credential,
+      password: event.target.value,
+    });
+  };
+
+  const loginHandler = () => {
+    logInWithEmailAndPassword(credential.email, credential.password);
+    navigate("/home");
+  };
+
   return (
     <>
       <Box sx={{ p: "40px 0px" }}>
@@ -24,6 +67,8 @@ export default function SignInForm() {
             label="Email"
             placeholder="Email"
             type="email"
+            value={credential.email}
+            onChange={textFieldEmailOnChangeHandler}
           >
             Email
           </TextField>
@@ -33,6 +78,8 @@ export default function SignInForm() {
             label="Password"
             type="password"
             placeholder="Password"
+            value={credential.password}
+            onChange={textFieldPasswordOnChangeHandler}
           >
             Password
           </TextField>
@@ -43,6 +90,7 @@ export default function SignInForm() {
                 p: "15px 30px",
                 display: "flex",
               }}
+              onClick={loginHandler}
             >
               <Typography fontWeight="700" color="white">
                 Sign In

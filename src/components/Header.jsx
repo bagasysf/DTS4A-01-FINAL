@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "../authentication/firebase";
 
 const Header = ({ typeHeader }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+
+  const logoutHandler = () => {
+    logOut();
+    navigate("/");
+  };
 
   const handleTypeSearch = (e) => {
     setSearch(e.target.value);
@@ -36,12 +42,15 @@ const Header = ({ typeHeader }) => {
         }}
       >
         <Logo />
-        <Box sx={{ display: "flex", gap: "10px" }}>
+        <Button
+          sx={{ display: "flex", gap: "10px", textTransform: "none" }}
+          onClick={logoutHandler}
+        >
           <LogoutIcon color="secondary" />
           <Typography color="secondary" fontWeight="700">
             Logout
           </Typography>
-        </Box>
+        </Button>
       </Box>
 
       {typeHeader === "search" ? (
