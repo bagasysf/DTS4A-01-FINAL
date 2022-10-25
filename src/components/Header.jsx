@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import LogoutIcon from "@mui/icons-material/Logout";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { TextField } from "@mui/material";
@@ -64,7 +62,15 @@ const Header = ({ typeHeader }) => {
           />
         </Box>
       ) : (
-        <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "20px",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate(-1)}
+        >
           <ArrowBackIcon color="primary"></ArrowBackIcon>
           <Typography color="primary" fontWeight="700">
             Back
