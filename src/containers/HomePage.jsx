@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GridNews from "../components/GridNews";
@@ -8,9 +9,6 @@ import Container from "@mui/material/Container";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Dialog from "@mui/material/Dialog";
-import { auth } from "../authentication/firebase";
-import { useNavigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Typography, Box } from "@mui/material";
 
 import useNewsStore, {
@@ -25,9 +23,6 @@ import useNewsStore, {
 } from "../stores/news";
 
 const HomePage = () => {
-  const [user, isLoading, error] = useAuthState(auth);
-  const navigate = useNavigate();
-
   const [openError, setOpenError] = useState(true);
 
   const fetchNews = useNewsStore(selectFetchNews);
@@ -47,18 +42,6 @@ const HomePage = () => {
     fetchNews();
     fetchTopNews();
   }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-    if (!user) {
-      navigate("/signin");
-    }
-    if (error) {
-      console.log(error);
-    }
-  }, [user, isLoading, error]);
 
   return (
     <>

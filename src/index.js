@@ -13,6 +13,7 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./themes/theme";
 import LandingContainer from "./containers/LandingContainer";
 import "@fontsource/poppins";
+import ProtectedComponent from "./components/ProtectedComponent";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,8 +22,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingContainer />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/content/*" element={<DetailPage />} />
+          <Route path="/home" element={<ProtectedComponent><HomePage /></ProtectedComponent> } />
+          <Route path="/content/*" element={<ProtectedComponent><DetailPage /></ProtectedComponent>} />
           <Route path="/search/*" element={<SearchPage />} />
           <Route path="/signin" element={<SignInContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
