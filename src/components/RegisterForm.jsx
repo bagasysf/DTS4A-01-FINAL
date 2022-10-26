@@ -11,6 +11,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [user, isLoading, error] = useAuthState(auth);
+  const [statusError, setStatusError] = useState(null);
 
   const [credential, setCredential] = useState({
     email: "",
@@ -30,18 +31,41 @@ export default function RegisterForm() {
   });
 
   const textFieldEmailOnChangeHandler = (event) => {
+    setStatusError(null);
+
     setCredential({
       ...credential,
       email: event.target.value,
     });
   };
 
-  const registerHandler = () => {
-    registrationWithEmailAndPassword(credential.email, credential.password);
+  const registerHandler = async () => {
+    const error = await registrationWithEmailAndPassword(
+      credential.email,
+      credential.password
+    );
+
+    if (credential.password === "" || credential.password === " ") {
+      setStatusError("Password cannot be empty");
+      return;
+    }
+
+    if (credential.password.length < 6) {
+      setStatusError("Password should be at least 6 characters");
+      return;
+    }
+
+    if (error) {
+      setStatusError(error.code);
+      return;
+    }
+
     navigate("/signin");
   };
 
   const textFieldPasswordOnChangeHandler = (event) => {
+    setStatusError(null);
+
     setCredential({
       ...credential,
       password: event.target.value,
@@ -64,6 +88,14 @@ export default function RegisterForm() {
           }}
           color="secondary.dark"
         >
+          {statusError !== null ? (
+            <Typography variant="body1" align="center" color="error.main">
+              {statusError}
+            </Typography>
+          ) : (
+            ""
+          )}
+
           <TextField
             required
             id="email"

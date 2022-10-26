@@ -14,6 +14,7 @@ export default function SignInForm() {
   const navigate = useNavigate();
 
   const [user, isLoading, error] = useAuthState(auth);
+  const [statusError, setStatusError] = useState(null);
 
   useEffect(() => {
     if (isLoading) {
@@ -28,6 +29,8 @@ export default function SignInForm() {
   }, [user, isLoading, navigate]);
 
   const textFieldEmailOnChangeHandler = (event) => {
+    setStatusError(null);
+
     setCredential({
       ...credential,
       email: event.target.value,
@@ -35,14 +38,25 @@ export default function SignInForm() {
   };
 
   const textFieldPasswordOnChangeHandler = (event) => {
+    setStatusError(null);
+
     setCredential({
       ...credential,
       password: event.target.value,
     });
   };
 
-  const loginHandler = () => {
-    logInWithEmailAndPassword(credential.email, credential.password);
+  const loginHandler = async () => {
+    const error = await logInWithEmailAndPassword(
+      credential.email,
+      credential.password
+    );
+
+    if (error) {
+      setStatusError(error);
+      return;
+    }
+
     navigate("/home");
   };
 
@@ -61,6 +75,14 @@ export default function SignInForm() {
             p: "40px 0px",
           }}
         >
+          {statusError !== null ? (
+            <Typography variant="body1" align="center" color="error.main">
+              Email/Password anda salah!
+            </Typography>
+          ) : (
+            ""
+          )}
+
           <TextField
             required
             id="email"

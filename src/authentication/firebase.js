@@ -32,10 +32,12 @@ const registrationWithEmailAndPassword = async (email, password) => {
       password
     );
     console.log("User yang sudah regis adalah", userCredential.user);
+    return null;
   } catch (err) {
     console.log(err);
     console.log("Code: ", err.code);
     console.log("Message: ", err.message);
+    return err;
   }
 };
 const logInWithEmailAndPassword = async (email, password) => {
@@ -46,10 +48,12 @@ const logInWithEmailAndPassword = async (email, password) => {
       password
     );
     console.log("User yang sudah login adalah", userCredential.user);
+    return null;
   } catch (err) {
     console.log(err);
     console.log("Code: ", err.code);
     console.log("Message: ", err.message);
+    return err;
   }
 };
 
