@@ -46,6 +46,7 @@ const HomePage = () => {
             maxWidth="xl"
             sx={{
               minHeight: "100vh",
+              paddingX: { xs: "0px !important", md: "16px" },
             }}
           >
             <h2>Result</h2>

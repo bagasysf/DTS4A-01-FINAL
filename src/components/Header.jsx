@@ -41,7 +41,7 @@ const Header = ({ typeHeader }) => {
           alignItems: "center",
         }}
       >
-        <Logo />
+        <Logo to="home" />
         <Button
           sx={{ display: "flex", gap: "10px", textTransform: "none" }}
           onClick={logoutHandler}

@@ -8,7 +8,7 @@ const HotNews = ({ topNews }) => {
   return (
     <Box
       sx={{
-        height: "450px",
+        height: { xs: "220px", sm: "450px" },
         position: "relative",
         display: "flex",
       }}
@@ -27,7 +27,7 @@ const HotNews = ({ topNews }) => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            height: "420px",
+            height: { xs: "220px", sm: "420px" },
             width: "100%",
             borderRadius: "10px",
           }}
@@ -35,7 +35,7 @@ const HotNews = ({ topNews }) => {
         <Box
           sx={{
             background: `linear-gradient(0deg, rgba(0,0,0,0.65) 0%, rgba(225,225,225,0) 100%)`,
-            height: "420px",
+            height: { xs: "220px", sm: "420px" },
             width: "100%",
             position: "absolute",
             borderRadius: "10px",
@@ -69,11 +69,12 @@ const HotNews = ({ topNews }) => {
                 variant="h4"
                 component="div"
                 sx={{
-                  width: "400px",
+                  width: { xs: "100%", lg: "400px" },
                   mb: "10px",
                   mt: "10px",
                   fontFamily: "Poppins",
                   color: "white",
+                  fontSize: { xs: "1.125rem;", lg: "2.125rem;" },
                 }}
               >
                 {topNews.webTitle}

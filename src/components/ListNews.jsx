@@ -1,16 +1,9 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import countTime from "../utils/countTime";
 import Stack from "@mui/material/Stack";
-
-const Img = styled("img")(({ theme }) => ({
-  height: "auto",
-  width: "20%",
-  borderRadius: "8px",
-}));
 
 const ListNews = ({ news }) => {
   return (
@@ -29,11 +22,22 @@ const ListNews = ({ news }) => {
           <Box
             sx={{ display: "flex", position: "relative", cursor: "pointer" }}
           >
-            <Img src={data.fields.thumbnail} alt={data.webTitle} />
+            <Box
+              sx={{
+                backgroundImage: `url(${data.fields.thumbnail})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "200px",
+                height: "100px",
+                borderRadius: "10px",
+              }}
+            />
             <Stack
               spacing={2}
               sx={{
                 ml: "20px",
+                width: "100%",
               }}
             >
               <Typography
@@ -44,12 +48,19 @@ const ListNews = ({ news }) => {
                   mb: "10px",
                   mt: "10px",
                   flexGrow: "1",
+                  fontSize: { xs: "1.2rem", lg: "1.5rem" },
                   fontFamily: "Playfair Display",
                 }}
               >
                 {data.webTitle}
               </Typography>
-              <Box>
+              <Box
+                sx={{
+                  display: { xs: "flex", md: "inline-block" },
+                  flexDirection: "column",
+                  mt: { xs: "0px !important", md: "16px" },
+                }}
+              >
                 <Typography
                   variant="caption"
                   color="text.secondary"

@@ -55,7 +55,7 @@ const DetailPage = () => {
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: "420px",
+                    height: { xs: "220px", sm: "420px" },
                     width: "100%",
                     marginTop: "10px",
                     borderRadius: "10px",
@@ -71,6 +71,7 @@ const DetailPage = () => {
                       width: "100%",
                       mb: "10px",
                       mt: "10px",
+                      fontSize: { xs: "1.525rem", lg: "2.125rem" },
                       color: "black",
                     }}
                   >
@@ -98,7 +99,7 @@ const DetailPage = () => {
                   component="div"
                   sx={{
                     mt: "20px",
-                    fontSize: "22px",
+                    fontSize: { xs: "18px", md: "22px" },
                     color: "black",
                     textAlign: "justify",
                     display: "flex",
