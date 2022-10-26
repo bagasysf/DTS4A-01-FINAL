@@ -77,7 +77,7 @@ export default function SignInForm() {
         >
           {statusError !== null ? (
             <Typography variant="body1" align="center" color="error.main">
-              Email/Password anda salah!
+              Your email/password is wrong!
             </Typography>
           ) : (
             ""
