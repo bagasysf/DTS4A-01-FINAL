@@ -19,4 +19,5 @@ Aplikasi portal berita yang mempunyai fitur:
 - Halaman Detail
 - Pencarian (unik)
 
-Style : MUI
+Style : MUI \
+API   : <https://open-platform.theguardian.com>
