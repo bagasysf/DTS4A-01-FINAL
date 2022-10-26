@@ -19,4 +19,4 @@ Aplikasi portal berita yang mempunyai fitur:
 - Halaman Detail
 - Pencarian (unik)
 
-Style : MU
+Style : MUI
