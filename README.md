@@ -1,7 +1,22 @@
-# DTS REA4 Final Project
+## DTS REA4 Final Project
 
-a. Preview GIF:
+### Preview GIF
 
-b. Link App: https://sj-news.netlify.app
+![Preview](preview.gif)
 
-c. Description: 
+### Link App
+
+<https://sj-news.netlify.app>
+
+### Description
+
+Aplikasi portal berita yang mempunyai fitur:
+
+- Login
+- Logout
+- Register
+- Halaman Utama
+- Halaman Detail
+- Pencarian (unik)
+
+Style : MU
